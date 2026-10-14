@@ -4,7 +4,8 @@ COPY package*.json ./
 RUN npm ci 
 COPY . .
 RUN npm run build
+
 FROM nginx
 COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 7153
+EXPOSE 80
 CMD ["nginx","-g","daemon off;"]
